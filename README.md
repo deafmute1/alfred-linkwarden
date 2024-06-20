@@ -1,6 +1,6 @@
 Search linkwarden from alfred.
 
-Usage: lw <query>
+Usage: lw {query}
 
 TODO
 - Add options to action url in other browser, incognito etc.
