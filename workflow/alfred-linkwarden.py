@@ -37,7 +37,7 @@ def main(workflow):
     workflow.send_feedback()
     
 if __name__ == "__main__":
-# if somehow not inside venv, force recreate venv and rerun helper script
+    # if somehow not inside venv, force recreate venv and rerun helper script
     def in_venv():
         return (hasattr(sys, 'real_prefix') or
                 (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix))
