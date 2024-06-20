@@ -7,3 +7,4 @@ Usage: lw {query}
 TODO
 - Add options to action url in other browser, incognito etc.
 - More options to browse linkwarden (e.g. collections)
+- Download and display favicons
