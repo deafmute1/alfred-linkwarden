@@ -8,6 +8,19 @@
 	<string>Internet</string>
 	<key>connections</key>
 	<dict>
+		<key>885ABB2A-0C8E-48AC-831A-EC862F9BA401</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>C3938C43-F374-46D7-9C55-3200430ED8C3</key>
 		<array>
 			<dict>
@@ -60,7 +73,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>bash ./helper.sh "$@"</string>
+				<string>bash ./helper.sh link "$@"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -102,11 +115,61 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>bash ./helper.sh collection 16 "$@"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>885ABB2A-0C8E-48AC-831A-EC862F9BA401</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>Search linkwarden!
+	<string>Search linkwarden from alfred.
 
-USAGE: lw &lt;query&gt;</string>
+## Usage
+You can search all links with the default keyword, `lw {query}`
+
+You can search within a collection/show all items in collection ordered by date added by adding a custom keyword. An example is given in the workflow object. You need to create a `Script Filter` object, and add `bash ./helper.sh collection 16 "$@"` as the script value, where `16` is the specific collection id. You can retrieve this id by looking at the url of a collection when it is open in your browse, it will be the final value in the path.</string>
 	<key>uidata</key>
 	<dict>
 		<key>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</key>
@@ -115,6 +178,15 @@ USAGE: lw &lt;query&gt;</string>
 			<real>330</real>
 			<key>ypos</key>
 			<real>105</real>
+		</dict>
+		<key>885ABB2A-0C8E-48AC-831A-EC862F9BA401</key>
+		<dict>
+			<key>note</key>
+			<string>Search a specific collection with a keyword</string>
+			<key>xpos</key>
+			<real>95</real>
+			<key>ypos</key>
+			<real>230</real>
 		</dict>
 		<key>C3938C43-F374-46D7-9C55-3200430ED8C3</key>
 		<dict>
@@ -172,7 +244,7 @@ USAGE: lw &lt;query&gt;</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0</string>
+	<string>1.2</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
