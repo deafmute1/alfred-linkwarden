@@ -6,24 +6,31 @@ import urllib.parse
 
 from workflow import Workflow, web, ICON_INFO
 
-def main(workflow):
-    if workflow.update_available:
-        workflow.add_item('New version available',
-            'Action this item to install the update',
-            autocomplete='workflow:update',
-            icon=ICON_INFO
-        )
-
-    response = web.get(
+def get_links(query: str|None, collection_id: str|None = None): 
+    params = {
+        "searchByName": "true",
+        "searchByDescription": "true",
+        "searchByUrl": "true"
+    } 
+    if query is not None: params['searchQueryString'] = query 
+    if collection_id is not None: params['collectionId'] = collection_id
+    return web.get(
         url=urllib.parse.urljoin(os.environ['LW_URL'], "/api/v1/links"),
         headers={"Authorization": f"Bearer {os.environ["LW_API_KEY"]}"},
-        params={
-            "searchQueryString": sys.argv[1:],
-            "searchByName": "true",
-            "searchByDescription": "true",
-            "searchByUrl": "true"
-        }        
+        params=params       
     )
+
+def main(workflow):
+    if sys.argv[1] == "link": 
+        response = get_links(' '.join(sys.argv[2:]), None)
+    elif sys.argv[1] == "collection": 
+        if len(sys.argv) > 3:
+            query = ' '.join(sys.argv[3:]) 
+        else:
+            query = None
+        response = get_links(query, sys.argv[2])
+    else: 
+        return
 
     for item in response.json()["response"]:
         workflow.add_item(
