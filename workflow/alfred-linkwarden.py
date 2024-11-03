@@ -4,7 +4,8 @@ import os
 import sys 
 import urllib.parse
 
-from workflow import Workflow, web, ICON_INFO
+import requests 
+from workflow import Workflow 
 
 def get_links(query: str|None, collection_id: str|None = None): 
     params = {
@@ -14,33 +15,48 @@ def get_links(query: str|None, collection_id: str|None = None):
     } 
     if query is not None: params['searchQueryString'] = query 
     if collection_id is not None: params['collectionId'] = collection_id
-    return web.get(
+    return requests.get(
         url=urllib.parse.urljoin(os.environ['LW_URL'], "/api/v1/links"),
-        headers={"Authorization": f"Bearer {os.environ["LW_API_KEY"]}"},
+        headers={"Authorization": f"Bearer {os.environ["LW_API_KEY"]}"}, 
         params=params       
     )
-
-def main(workflow):
-    if sys.argv[1] == "link": 
-        response = get_links(' '.join(sys.argv[2:]), None)
-    elif sys.argv[1] == "collection": 
-        if len(sys.argv) > 3:
-            query = ' '.join(sys.argv[3:]) 
+    
+def delete_link(link_id: str): 
+    return requests.delete(
+        url=urllib.parse.urljoin(os.environ['LW_URL'], f"/api/v1/links/{link_id}"), 
+        headers={"Authorization": f"Bearer {os.environ["LW_API_KEY"]}"},
+    )
+    
+def proc_args_lw(args: list) -> requests.Response:
+    if args[0] == "link": 
+        return get_links(' '.join(args[1:]), None)
+    elif args[0] == "collection": 
+        if len(args) > 2:
+            query = ' '.join(args[2:]) 
         else:
             query = None
-        response = get_links(query, sys.argv[2])
+        return get_links(query, args[1])
+    elif args[0] == "delete": 
+        delete_link(args[1])
+        sys.exit()
     else: 
-        return
-
-    for item in response.json()["response"]:
-        workflow.add_item(
-            title=item["name"],
-            subtitle=item["url"],
-            copytext=item["url"],
-            arg=item["url"],
+        sys.exit()
+        
+def main(workflow):
+    response = proc_args_lw(sys.argv[1:])
+    
+    for link in response.json()["response"]:
+        item = workflow.add_item(
+            title=link["name"],
+            subtitle=link["url"],
+            copytext=link["url"],
+            arg=link["url"],
             valid=True
         )
-        
+        mod = item.add_modifier(
+            "cmd", subtitle="Delete Entry", arg=str(link["id"])
+        )
+
     workflow.send_feedback()
     
 if __name__ == "__main__":
