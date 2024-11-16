@@ -8,8 +8,44 @@
 	<string>Internet</string>
 	<key>connections</key>
 	<dict>
-		<key>885ABB2A-0C8E-48AC-831A-EC862F9BA401</key>
+		<key>0764D263-0FD7-4BA1-B04C-99673D62C89D</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1235AF70-A636-4AC7-9CF7-A003600AEDF9</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1235AF70-A636-4AC7-9CF7-A003600AEDF9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F1F713A4-7DB9-4D20-87CB-D3AD60341D02</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>1CDB9ED2-66E7-4DD3-8ABE-3F95BDD0F95D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CCFFCA17-1963-4E36-9935-1E463BA63F05</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>Delete link</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</string>
@@ -22,11 +58,80 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>CCFFCA17-1963-4E36-9935-1E463BA63F05</string>
+				<string>0764D263-0FD7-4BA1-B04C-99673D62C89D</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
+				<string>View preserved formats</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>1F46BE8E-7808-467B-B29B-3129BECD9B50</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1CDB9ED2-66E7-4DD3-8ABE-3F95BDD0F95D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4599761C-52CC-4110-A13E-878BF82D9C40</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1F46BE8E-7808-467B-B29B-3129BECD9B50</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>1AB9426F-9E10-441B-84AC-CEC0D270FDA4</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>885ABB2A-0C8E-48AC-831A-EC862F9BA401</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CCFFCA17-1963-4E36-9935-1E463BA63F05</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
 				<string>Delete Link</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>0764D263-0FD7-4BA1-B04C-99673D62C89D</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>View preserved versions</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -35,6 +140,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>CCFFCA17-1963-4E36-9935-1E463BA63F05</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>Delete Link</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -45,11 +160,11 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>CCFFCA17-1963-4E36-9935-1E463BA63F05</string>
+				<string>0764D263-0FD7-4BA1-B04C-99673D62C89D</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>Delete Link</string>
+				<string>View preserved versions</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>
@@ -67,6 +182,29 @@
 	<string>Linkwarden Search</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>bash ./helper.sh delete "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CCFFCA17-1963-4E36-9935-1E463BA63F05</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -115,27 +253,6 @@
 			<string>C3938C43-F374-46D7-9C55-3200430ED8C3</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<false/>
-				<key>skipvarencode</key>
-				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -189,70 +306,353 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
 				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
 				<key>escaping</key>
 				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
 				<key>script</key>
-				<string>bash ./helper.sh delete "$1"</string>
+				<string>bash ./helper.sh collection "$ID" "$@"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Display Collection</string>
 				<key>type</key>
 				<integer>11</integer>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>CCFFCA17-1963-4E36-9935-1E463BA63F05</string>
+			<string>1CDB9ED2-66E7-4DD3-8ABE-3F95BDD0F95D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>bash ./helper.sh saved "$ID" </string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>View Preserved Versions</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>1235AF70-A636-4AC7-9CF7-A003600AEDF9</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F1F713A4-7DB9-4D20-87CB-D3AD60341D02</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>ID</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>1F46BE8E-7808-467B-B29B-3129BECD9B50</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>ID</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>0764D263-0FD7-4BA1-B04C-99673D62C89D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>lwc</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>bash ./helper.sh collections "$@"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Linkwarden Collections</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>4599761C-52CC-4110-A13E-878BF82D9C40</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<false/>
+				<key>skipvarencode</key>
+				<false/>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{var:LW_URL}/collections/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>1AB9426F-9E10-441B-84AC-CEC0D270FDA4</string>
+			<key>version</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>Search linkwarden from alfred.
+	<string>## Setup 
+1. Set linkwarden API key 
+2. Set instance URL
 
+## Usage 
+To display/search all links: `lw {query}`
+- To open in browser, return the link.
+- To delete a link, use `Shift` modifier
+- To open a preserved version on your linkwarden server use `cmd/⌘`.
 
-## Usage
-You can search all links with the default keyword, `lw {query}`
+To display/search all collections: `lwc {query}`
+- You can display/search each collection by returning it. The contents of each collection are searchable and have the same modifier options as `lw`
+- You can open the collection in your browser with `cmd/⌘` modifier
 
-You can search within a collection/show all items in collection ordered by date added by adding a custom keyword. An example is given in the workflow object. You need to create a `Script Filter` object, and add `bash ./helper.sh collection 16 "$@"` as the script value, where `16` is the specific collection id. You can retrieve this id by looking at the url of a collection when it is open in your browse, it will be the final value in the path.
-
-You can delete links using the cmd/⌘ modifier.</string>
+You can search/display a collection via a custom keyword. 
+- An example is given in the workflow object. 
+- You need create a `Script Filter` with the script `bash ./helper.sh collection 16 "$@"`, where `16` is the specific collection id.
+-  You can retrieve this id by looking at the url of a collection when it is open in your browse, it will be the final value in the path.</string>
 	<key>uidata</key>
 	<dict>
+		<key>0764D263-0FD7-4BA1-B04C-99673D62C89D</key>
+		<dict>
+			<key>xpos</key>
+			<real>515</real>
+			<key>ypos</key>
+			<real>430</real>
+		</dict>
+		<key>1235AF70-A636-4AC7-9CF7-A003600AEDF9</key>
+		<dict>
+			<key>xpos</key>
+			<real>565</real>
+			<key>ypos</key>
+			<real>400</real>
+		</dict>
 		<key>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</key>
 		<dict>
 			<key>xpos</key>
-			<real>430</real>
+			<real>555</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>245</real>
+		</dict>
+		<key>1AB9426F-9E10-441B-84AC-CEC0D270FDA4</key>
+		<dict>
+			<key>xpos</key>
+			<real>280</real>
+			<key>ypos</key>
+			<real>500</real>
+		</dict>
+		<key>1CDB9ED2-66E7-4DD3-8ABE-3F95BDD0F95D</key>
+		<dict>
+			<key>xpos</key>
+			<real>275</real>
+			<key>ypos</key>
+			<real>390</real>
+		</dict>
+		<key>1F46BE8E-7808-467B-B29B-3129BECD9B50</key>
+		<dict>
+			<key>xpos</key>
+			<real>225</real>
+			<key>ypos</key>
+			<real>420</real>
+		</dict>
+		<key>4599761C-52CC-4110-A13E-878BF82D9C40</key>
+		<dict>
+			<key>note</key>
+			<string>Search &amp; display linkwarden collections</string>
+			<key>xpos</key>
+			<real>80</real>
+			<key>ypos</key>
+			<real>445</real>
 		</dict>
 		<key>885ABB2A-0C8E-48AC-831A-EC862F9BA401</key>
 		<dict>
 			<key>note</key>
 			<string>Search a specific collection with a keyword</string>
 			<key>xpos</key>
-			<real>155</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>225</real>
 		</dict>
 		<key>C3938C43-F374-46D7-9C55-3200430ED8C3</key>
 		<dict>
 			<key>xpos</key>
-			<real>145</real>
+			<real>280</real>
 			<key>ypos</key>
-			<real>105</real>
+			<real>110</real>
 		</dict>
 		<key>CCFFCA17-1963-4E36-9935-1E463BA63F05</key>
 		<dict>
 			<key>note</key>
 			<string>delete link</string>
 			<key>xpos</key>
-			<real>435</real>
+			<real>545</real>
 			<key>ypos</key>
-			<real>250</real>
+			<real>75</real>
+		</dict>
+		<key>F1F713A4-7DB9-4D20-87CB-D3AD60341D02</key>
+		<dict>
+			<key>xpos</key>
+			<real>710</real>
+			<key>ypos</key>
+			<real>400</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -303,7 +703,7 @@ You can delete links using the cmd/⌘ modifier.</string>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.3</string>
+	<string>1.4</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
