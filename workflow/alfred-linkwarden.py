@@ -14,7 +14,7 @@ SAVED_FORMATS = {
 }
 
 def lw_url() -> str:
-    return os.environ['LW_URL'].rstrip('/')
+    return os.environ['A_LW_URL'].rstrip('/')
 
 def get_links(query: str|None, collection_id: str|None = None): 
     params = {
@@ -26,20 +26,20 @@ def get_links(query: str|None, collection_id: str|None = None):
     if collection_id is not None: params['collectionId'] = collection_id
     return requests.get(
         url=f"{lw_url()}/api/v1/links",
-        headers={"Authorization": f"Bearer {os.environ['LW_API_KEY']}"}, 
+        headers={"Authorization": f"Bearer {os.environ['A_LW_API_KEY']}"}, 
         params=params       
     )
     
 def delete_link(link_id: str): 
     return requests.delete(
         url=f"{lw_url()}/api/v1/links/{link_id}", 
-        headers={"Authorization": f"Bearer {os.environ['LW_API_KEY']}"},
+        headers={"Authorization": f"Bearer {os.environ['A_LW_API_KEY']}"},
     )
 
 def get_all_collections(): 
     return requests.get(
         url=f"{lw_url()}/api/v1/collections",
-        headers={"Authorization": f"Bearer {os.environ["LW_API_KEY"]}"},
+        headers={"Authorization": f"Bearer {os.environ["A_LW_API_KEY"]}"},
     )
     
 def query_json_to_workflow_item(response: requests.Response):
@@ -123,7 +123,7 @@ if __name__ == "__main__":
         return (hasattr(sys, 'real_prefix') or
                 (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix))
     if not in_venv():
-        env_loc = os.environ.get("ENV_LOC", "./env")
+        env_loc = os.environ.get("A_ENV_LOC", "./env")
         if os.path.isdir(env_loc):
             shutil.rmtree(env_loc)
         subprocess.run(["bash", "./helper.sh"])

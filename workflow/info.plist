@@ -574,7 +574,7 @@ You can search/display a collection via a custom keyword.
 		<key>0764D263-0FD7-4BA1-B04C-99673D62C89D</key>
 		<dict>
 			<key>xpos</key>
-			<real>515</real>
+			<real>500</real>
 			<key>ypos</key>
 			<real>430</real>
 		</dict>
@@ -588,7 +588,7 @@ You can search/display a collection via a custom keyword.
 		<key>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</key>
 		<dict>
 			<key>xpos</key>
-			<real>555</real>
+			<real>575</real>
 			<key>ypos</key>
 			<real>245</real>
 		</dict>
@@ -627,25 +627,25 @@ You can search/display a collection via a custom keyword.
 			<key>note</key>
 			<string>Search a specific collection with a keyword</string>
 			<key>xpos</key>
-			<real>280</real>
+			<real>260</real>
 			<key>ypos</key>
-			<real>225</real>
+			<real>240</real>
 		</dict>
 		<key>C3938C43-F374-46D7-9C55-3200430ED8C3</key>
 		<dict>
 			<key>xpos</key>
-			<real>280</real>
+			<real>240</real>
 			<key>ypos</key>
-			<real>110</real>
+			<real>105</real>
 		</dict>
 		<key>CCFFCA17-1963-4E36-9935-1E463BA63F05</key>
 		<dict>
 			<key>note</key>
 			<string>delete link</string>
 			<key>xpos</key>
-			<real>545</real>
+			<real>565</real>
 			<key>ypos</key>
-			<real>75</real>
+			<real>90</real>
 		</dict>
 		<key>F1F713A4-7DB9-4D20-87CB-D3AD60341D02</key>
 		<dict>
@@ -676,7 +676,7 @@ You can search/display a collection via a custom keyword.
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>LW_API_KEY</string>
+			<string>A_LW_API_KEY</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -697,11 +697,9 @@ You can search/display a collection via a custom keyword.
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>LW_URL</string>
+			<string>A_LW_URL</string>
 		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string>1.4</string>
 	<key>webaddress</key>
