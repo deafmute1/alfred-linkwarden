@@ -25,23 +25,23 @@ def get_links(query: str|None, collection_id: str|None = None):
     if query is not None: params['searchQueryString'] = query 
     if collection_id is not None: params['collectionId'] = collection_id
     return requests.get(
-        url=f"{lw_url()}/api/v1/links",
-        headers={"Authorization": f"Bearer {os.environ['A_LW_API_KEY']}"}, 
+        url=lw_url() + "/api/v1/links",
+        headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']}, 
         params=params       
     )
     
 def delete_link(link_id: str): 
     return requests.delete(
-        url=f"{lw_url()}/api/v1/links/{link_id}", 
-        headers={"Authorization": f"Bearer {os.environ['A_LW_API_KEY']}"},
+        url=lw_url() + "/api/v1/links/" + link_id, 
+        headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
     )
 
 def get_all_collections(): 
     return requests.get(
-        url=f"{lw_url()}/api/v1/collections",
-        headers={"Authorization": f"Bearer {os.environ["A_LW_API_KEY"]}"},
+        url=lw_url() + "/api/v1/collections",
+        headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
     )
-    
+
 def query_json_to_workflow_item(response: requests.Response):
     for link in response.json()["response"]:
         item = workflow.add_item(
@@ -78,7 +78,7 @@ def collections_to_workflow_items(workflow: Workflow, response: requests.Respons
         item = workflow.add_item( 
             title=c["name"],
             subtitle=c["description"],
-            copytext=f"{lw_url()}/collections/{c['id']}",
+            copytext=lw_url() + "/collections/" + str(c['id']),
             arg=str(c['id']),
             valid=True
         )
@@ -106,10 +106,10 @@ def main(workflow: Workflow) -> requests.Response:
         # alfred-linkwarden.py delete <LINK ID (INT)>
         delete_link(args[1])
     elif args[0] == "saved": 
-        base=f"{lw_url()}/preserved/{args[1]}?format="
+        base=lw_url()+ "/preserved/" + args[1] + "?format="
         for k, v in SAVED_FORMATS.items(): 
             workflow.add_item(
-                title=f"Open {k}",
+                title="Open" + k,
                 copytext=base + v, 
                 arg=base + v, 
                 valid=True
