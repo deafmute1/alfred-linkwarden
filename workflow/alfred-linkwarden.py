@@ -2,6 +2,7 @@ import shutil
 import subprocess
 import os 
 import sys 
+from typing import Union
 
 import requests 
 from workflow import Workflow 
@@ -16,7 +17,7 @@ SAVED_FORMATS = {
 def lw_url() -> str:
     return os.environ['A_LW_URL'].rstrip('/')
 
-def get_links(query: str|None, collection_id: str|None = None): 
+def get_links(query: Union[str, None], collection_id: Union[str, None] = None): 
     params = {
         "searchByName": "true",
         "searchByDescription": "true",
