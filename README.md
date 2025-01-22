@@ -2,9 +2,12 @@ A linkwarden client for alfred.
 
 [Download Here](https://github.com/deafmute1/alfred-linkwarden/releases/latest/download/Linkwarden.Search.alfredworkflow)
 
+Requires: Python. Tested on Python3.9+.
+
 ## Setup 
 1. Set linkwarden API key 
 2. Set instance URL
+3. On first run, please allow the script some time (>1 min) to install dependancies in the background before it will display results.
 
 ## Usage 
 To display/search all links: `lw {query}`
