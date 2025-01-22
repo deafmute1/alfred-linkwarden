@@ -700,6 +700,8 @@ You can search/display a collection via a custom keyword.
 			<string>A_LW_URL</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
 	<string>1.6</string>
 	<key>webaddress</key>
