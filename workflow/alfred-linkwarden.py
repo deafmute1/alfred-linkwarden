@@ -65,6 +65,7 @@ def links_to_workflow_items(workflow: Workflow, response: requests.Response):
     for link in response.json()["response"]:
         item = workflow.add_item(
             title=link["name"],
+            uid="l" + str(link["id"])
             subtitle=link["url"],
             copytext=link["url"],
             arg=link["url"],
@@ -82,6 +83,7 @@ def collections_to_workflow_items(workflow: Workflow, response: requests.Respons
     for c in response.json()["response"]:
         item = workflow.add_item( 
             title=c["name"],
+            uid="c" + str(c["id"])
             subtitle=c["description"],
             copytext=lw_url() + "/collections/" + str(c['id']),
             arg=str(c['id']),
