@@ -46,20 +46,6 @@ def get_all_collections():
         url=lw_url() + "/api/v1/collections",
         headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
     )
-
-def query_json_to_workflow_item(response: requests.Response):
-    for link in response.json()["response"]:
-        item = workflow.add_item(
-            title=link["name"],
-            subtitle=link["url"],
-            copytext=link["url"],
-            arg=link["url"],
-            valid=True
-        )
-        mod = item.add_modifier(
-            "cmd", subtitle="Delete Entry", arg=str(link["id"])
-        )
-    workflow.send_feedback()
     
 def links_to_workflow_items(workflow: Workflow, response: requests.Response):
     for link in response.json()["response"]:
