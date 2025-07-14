@@ -627,14 +627,14 @@ You can search/display a collection via a custom keyword.
 			<key>note</key>
 			<string>Search a specific collection with a keyword</string>
 			<key>xpos</key>
-			<real>260</real>
+			<real>270</real>
 			<key>ypos</key>
 			<real>240</real>
 		</dict>
 		<key>C3938C43-F374-46D7-9C55-3200430ED8C3</key>
 		<dict>
 			<key>xpos</key>
-			<real>240</real>
+			<real>265</real>
 			<key>ypos</key>
 			<real>105</real>
 		</dict>

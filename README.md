@@ -24,6 +24,8 @@ You can search/display a collection via a custom keyword.
 - You need create a `Script Filter` with the script `bash ./helper.sh collection 16 "$@"`, where `16` is the specific collection id.
 -  You can retrieve this id by looking at the url of a collection when it is open in your browse, it will be the final value in the path.
 
+This workflow supports some special meta "magic" arguments. To view them, use `lw workflow:help`. To force the workflow to check for and install updates, use `lw workflow:update`. 
+
 ## TODO
 - Download and display favicons? - expensive
 - Show generic icons for collections, links and each preserved format

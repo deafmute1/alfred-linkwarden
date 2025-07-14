@@ -7,6 +7,8 @@ from typing import Union
 import requests 
 from workflow import Workflow 
 
+__version__ = "1.6"
+
 SAVED_FORMATS = {
     "Screenshot": "1", 
     "PDF": "2",
@@ -89,7 +91,7 @@ def collections_to_workflow_items(workflow: Workflow, response: requests.Respons
     workflow.send_feedback()
     
 def main(workflow: Workflow) -> requests.Response:
-    args = sys.argv[1:]
+    args = workflow.args
     if args[0] == "link":
         # alfred-linkwarden.py link <QUERY (STR)> 
         links_to_workflow_items(workflow, get_links(' '.join(args[1:]), None))
@@ -117,7 +119,6 @@ def main(workflow: Workflow) -> requests.Response:
             )
         workflow.send_feedback()
 
-    
 if __name__ == "__main__":
     # if somehow not inside venv, force recreate venv and rerun helper script
     def in_venv():
@@ -129,6 +130,12 @@ if __name__ == "__main__":
             shutil.rmtree(env_loc)
         subprocess.run(["bash", "./helper.sh"])
     
-    workflow = Workflow(update_settings={'github_slug': 'deafmute1/alfred-linkwarden'})
+    workflow = Workflow(update_settings={
+            'github_slug': 'deafmute1/alfred-linkwarden',
+            'version': __version__,
+            'frequency': 7
+        })
     workflow.data_serializer = 'json'
+    if workflow.update_available:
+        workflow.start_update()
     sys.exit(workflow.run(main))
