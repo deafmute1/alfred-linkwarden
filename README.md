@@ -29,8 +29,10 @@ This workflow supports some special meta "magic" arguments. To view them, use `l
 ## TODO
 - Download and display favicons? - expensive
 - Show generic icons for collections, links and each preserved format
+- Refresh Script Filter after deleting item.
 
 ## Release Checklist
+- [ ] Test all three commands are working still. 
 - [ ] Update `__version__` string
 - [ ] Delete `workflow/env` folder 
 - [ ] Export workflow from Alfred Workflow Editor. 
