@@ -23,7 +23,9 @@ def get_links(query: Union[str, None], collection_id: Union[str, None] = None):
     params = {
         "searchByName": "true",
         "searchByDescription": "true",
-        "searchByUrl": "true"
+        "searchByUrl": "true", 
+        "searchByTags": "true", 
+        "searchByDescription": "true"
     } 
     if query is not None: params['searchQueryString'] = query 
     if collection_id is not None: params['collectionId'] = collection_id
