@@ -7,7 +7,7 @@ Requires: Python. Tested on Python3.9+.
 ## Setup 
 1. Set linkwarden API key 
 2. Set instance URL
-3. On first run, please allow the script some time (>1 min) to install dependancies in the background before it will display results.
+3. After install, please write `lw` or `lwc` and allow the script some time (>1 min) to install dependancies in the background before it will display results on subsequent uses.
 
 ## Usage 
 To display/search all links: `lw {query}`
@@ -24,7 +24,15 @@ You can search/display a collection via a custom keyword.
 - You need create a `Script Filter` with the script `bash ./helper.sh collection 16 "$@"`, where `16` is the specific collection id.
 -  You can retrieve this id by looking at the url of a collection when it is open in your browse, it will be the final value in the path.
 
-
 ## TODO
 - Download and display favicons? - expensive
 - Show generic icons for collections, links and each preserved format
+
+## Release Checklist
+- [ ] Update `__version__` string
+- [ ] Delete `workflow/env` folder 
+- [ ] Export workflow from Alfred Workflow Editor. 
+  - [ ] Copy README 
+  - [ ] Copy Version 
+- [ ] Push and create git tag for version
+- [ ] Make GitHub release and upload `Linkwarden.Search.alfredworkflow`
