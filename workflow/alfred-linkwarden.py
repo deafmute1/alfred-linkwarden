@@ -16,6 +16,10 @@ SAVED_FORMATS = {
     "Webpage Copy": "4"
 }
 
+"""
+API QUERIES
+"""
+
 def lw_url() -> str:
     return os.environ['A_LW_URL'].rstrip('/')
 
@@ -65,8 +69,13 @@ def links_to_workflow_items(workflow: Workflow, response: requests.Response):
         )
     workflow.send_feedback()
 
-def collections_to_workflow_items(workflow: Workflow, response: requests.Response): 
+def collections_to_workflow_items(
+        workflow: Workflow, response: requests.Response, filter_ss: str | None = None
+    ): 
     for c in response.json()["response"]:
+        # if filter provided, skip item if not substring of title
+        if filter_ss is not None and filter_ss.casefold() not in c["name"].casefold(): 
+            continue 
         item = workflow.add_item( 
             title=c["name"],
             uid="c" + str(c["id"]),
@@ -79,7 +88,14 @@ def collections_to_workflow_items(workflow: Workflow, response: requests.Respons
             "cmd", subtitle="Open in Browser"
         )
     workflow.send_feedback()
-    
+
+"""
+MAIN 
+"""
+def query_join_or_none(lst: list, from_index: int = 0) -> Union[str, None]: 
+    ret = " ".join(lst[from_index:]) 
+    return ret if ret else None
+
 def main(workflow: Workflow) -> requests.Response:
     args = workflow.args
     if args[0] == "link":
@@ -87,14 +103,10 @@ def main(workflow: Workflow) -> requests.Response:
         links_to_workflow_items(workflow, get_links(' '.join(args[1:]), None))
     elif args[0] == "collection":
         # alfred-linkwarden.py collection <COLLECTION ID (INT)>  <QUERY>
-        if len(args) > 2:
-            query = ' '.join(args[2:]) 
-        else:
-            query = None
-        links_to_workflow_items(workflow, get_links(query, args[1]))
+        links_to_workflow_items(workflow, get_links(query_join_or_none(args, 2), args[1]))
     elif args[0] == "collections": 
-        # alfred-linkwarden.py collections
-        collections_to_workflow_items(workflow, get_all_collections())
+        # alfred-linkwarden.py collections <QUERY OR EMPTY>
+        collections_to_workflow_items(workflow, get_all_collections(), query_join_or_none(args, 1))
     elif args[0] == "delete": 
         # alfred-linkwarden.py delete <LINK ID (INT)>
         delete_link(args[1])
