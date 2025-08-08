@@ -92,7 +92,7 @@ def collections_to_workflow_items(
 """
 MAIN 
 """
-def query_join_or_none(lst: list, from_index: int = 0) -> Union[str, None]: 
+def query_join(lst: list, from_index: int = 0) -> Union[str, None]: 
     ret = " ".join(lst[from_index:]) 
     return ret if ret else None
 
@@ -103,10 +103,10 @@ def main(workflow: Workflow) -> requests.Response:
         links_to_workflow_items(workflow, get_links(' '.join(args[1:]), None))
     elif args[0] == "collection":
         # alfred-linkwarden.py collection <COLLECTION ID (INT)>  <QUERY>
-        links_to_workflow_items(workflow, get_links(query_join_or_none(args, 2), args[1]))
+        links_to_workflow_items(workflow, get_links(query_join(args, 2), args[1]))
     elif args[0] == "collections": 
         # alfred-linkwarden.py collections <QUERY OR EMPTY>
-        collections_to_workflow_items(workflow, get_all_collections(), query_join_or_none(args, 1))
+        collections_to_workflow_items(workflow, get_all_collections(), query_join(args, 1))
     elif args[0] == "delete": 
         # alfred-linkwarden.py delete <LINK ID (INT)>
         delete_link(args[1])
