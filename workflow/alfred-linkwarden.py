@@ -7,7 +7,7 @@ from typing import Union
 import requests 
 from workflow import Workflow 
 
-__version__ = "1.7"
+__version__ = "1.8"
 
 SAVED_FORMATS = {
     "Screenshot": "1", 
