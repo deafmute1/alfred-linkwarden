@@ -80,6 +80,21 @@
 				<false/>
 			</dict>
 		</array>
+		<key>26479EF8-A8D2-4CAD-AC9A-35FD292ABA17</key>
+		<array/>
+		<key>2A0E354D-292D-4305-B646-C347BDB5C18C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5FA3B615-D477-461B-ABD5-B26B72965E61</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4599761C-52CC-4110-A13E-878BF82D9C40</key>
 		<array>
 			<dict>
@@ -97,6 +112,32 @@
 				<string>1AB9426F-9E10-441B-84AC-CEC0D270FDA4</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5FA3B615-D477-461B-ABD5-B26B72965E61</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>64230312-4F5B-4E5A-828B-F42498114CFB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>64230312-4F5B-4E5A-828B-F42498114CFB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>26479EF8-A8D2-4CAD-AC9A-35FD292ABA17</string>
+				<key>modifiers</key>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 				<key>vitoclose</key>
@@ -171,6 +212,19 @@
 		</array>
 		<key>CCFFCA17-1963-4E36-9935-1E463BA63F05</key>
 		<array/>
+		<key>D5134238-C175-42C1-BCAC-24D0EBC6FBAE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5FA3B615-D477-461B-ABD5-B26B72965E61</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>def</string>
@@ -182,6 +236,138 @@
 	<string>Linkwarden Search</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>lwa</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Add link</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>2A0E354D-292D-4305-B646-C347BDB5C18C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>bash ./helper.sh collections "$@"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>64230312-4F5B-4E5A-828B-F42498114CFB</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>bash ./helper.sh add "$1" "$addurl"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>26479EF8-A8D2-4CAD-AC9A-35FD292ABA17</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict>
+					<key>addurl</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>5FA3B615-D477-461B-ABD5-B26B72965E61</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>acceptstext</key>
+				<true/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Add to linkwarden</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>D5134238-C175-42C1-BCAC-24D0EBC6FBAE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -282,7 +468,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>bash ./helper.sh collection 16 "$@"</string>
+				<string>bash ./helper.sh collection 40 "$@"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -455,7 +641,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>1F46BE8E-7808-467B-B29B-3129BECD9B50</string>
+			<string>0764D263-0FD7-4BA1-B04C-99673D62C89D</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -475,7 +661,7 @@
 			<key>type</key>
 			<string>alfred.workflow.utility.argument</string>
 			<key>uid</key>
-			<string>0764D263-0FD7-4BA1-B04C-99673D62C89D</string>
+			<string>1F46BE8E-7808-467B-B29B-3129BECD9B50</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -581,44 +767,60 @@ This workflow supports some special meta "magic" arguments. To view them, use `l
 		<key>0764D263-0FD7-4BA1-B04C-99673D62C89D</key>
 		<dict>
 			<key>xpos</key>
-			<real>500</real>
+			<real>490</real>
 			<key>ypos</key>
-			<real>430</real>
+			<real>630</real>
 		</dict>
 		<key>1235AF70-A636-4AC7-9CF7-A003600AEDF9</key>
 		<dict>
 			<key>xpos</key>
-			<real>565</real>
+			<real>590</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>605</real>
 		</dict>
 		<key>126EF3B6-E7CB-4C32-BB88-B7CAF26DAFA5</key>
 		<dict>
 			<key>xpos</key>
-			<real>575</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>245</real>
+			<real>430</real>
 		</dict>
 		<key>1AB9426F-9E10-441B-84AC-CEC0D270FDA4</key>
 		<dict>
 			<key>xpos</key>
 			<real>280</real>
 			<key>ypos</key>
-			<real>500</real>
+			<real>720</real>
 		</dict>
 		<key>1CDB9ED2-66E7-4DD3-8ABE-3F95BDD0F95D</key>
 		<dict>
 			<key>xpos</key>
-			<real>275</real>
+			<real>300</real>
 			<key>ypos</key>
-			<real>390</real>
+			<real>595</real>
 		</dict>
 		<key>1F46BE8E-7808-467B-B29B-3129BECD9B50</key>
 		<dict>
 			<key>xpos</key>
-			<real>225</real>
+			<real>230</real>
 			<key>ypos</key>
-			<real>420</real>
+			<real>630</real>
+		</dict>
+		<key>26479EF8-A8D2-4CAD-AC9A-35FD292ABA17</key>
+		<dict>
+			<key>note</key>
+			<string>add url to collection</string>
+			<key>xpos</key>
+			<real>750</real>
+			<key>ypos</key>
+			<real>95</real>
+		</dict>
+		<key>2A0E354D-292D-4305-B646-C347BDB5C18C</key>
+		<dict>
+			<key>xpos</key>
+			<real>255</real>
+			<key>ypos</key>
+			<real>30</real>
 		</dict>
 		<key>4599761C-52CC-4110-A13E-878BF82D9C40</key>
 		<dict>
@@ -627,39 +829,64 @@ This workflow supports some special meta "magic" arguments. To view them, use `l
 			<key>xpos</key>
 			<real>80</real>
 			<key>ypos</key>
-			<real>445</real>
+			<real>655</real>
+		</dict>
+		<key>5FA3B615-D477-461B-ABD5-B26B72965E61</key>
+		<dict>
+			<key>note</key>
+			<string>Save url</string>
+			<key>xpos</key>
+			<real>450</real>
+			<key>ypos</key>
+			<real>125</real>
+		</dict>
+		<key>64230312-4F5B-4E5A-828B-F42498114CFB</key>
+		<dict>
+			<key>note</key>
+			<string>Select collection</string>
+			<key>xpos</key>
+			<real>595</real>
+			<key>ypos</key>
+			<real>95</real>
 		</dict>
 		<key>885ABB2A-0C8E-48AC-831A-EC862F9BA401</key>
 		<dict>
 			<key>note</key>
 			<string>Search a specific collection with a keyword</string>
 			<key>xpos</key>
-			<real>270</real>
+			<real>255</real>
 			<key>ypos</key>
-			<real>210</real>
+			<real>410</real>
 		</dict>
 		<key>C3938C43-F374-46D7-9C55-3200430ED8C3</key>
 		<dict>
 			<key>xpos</key>
-			<real>265</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>85</real>
+			<real>270</real>
 		</dict>
 		<key>CCFFCA17-1963-4E36-9935-1E463BA63F05</key>
 		<dict>
 			<key>note</key>
 			<string>delete link</string>
 			<key>xpos</key>
-			<real>565</real>
+			<real>600</real>
 			<key>ypos</key>
-			<real>90</real>
+			<real>280</real>
+		</dict>
+		<key>D5134238-C175-42C1-BCAC-24D0EBC6FBAE</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>165</real>
 		</dict>
 		<key>F1F713A4-7DB9-4D20-87CB-D3AD60341D02</key>
 		<dict>
 			<key>xpos</key>
-			<real>710</real>
+			<real>770</real>
 			<key>ypos</key>
-			<real>400</real>
+			<real>605</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

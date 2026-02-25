@@ -3,10 +3,11 @@ import subprocess
 import os 
 import sys 
 from typing import Union
-
+from urllib.parse import urlsplit
+import json
 
 import requests 
-from workflow import Workflow 
+from workflow import Workflow, Variables
 
 __version__ = "1.8"
 
@@ -24,7 +25,9 @@ API QUERIES
 def lw_url() -> str:
     return os.environ['A_LW_URL'].rstrip('/')
 
-def get_links(query: Union[str, None], collection_id: Union[str, None] = None): 
+def get_links(
+        query: Union[str, None], collection_id: Union[str, None] = None
+    ) -> requests.Response: 
     params = {
         "searchByName": "true",
         "searchByDescription": "true",
@@ -37,25 +40,46 @@ def get_links(query: Union[str, None], collection_id: Union[str, None] = None):
     return requests.get(
         url=lw_url() + "/api/v1/links",
         headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']}, 
-        params=params       
+        params=params
     )
-    
-def delete_link(link_id: str): 
+
+def delete_link(link_id: str) -> requests.Response: 
     return requests.delete(
         url=lw_url() + "/api/v1/links/" + link_id, 
         headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
     )
 
-def get_all_collections(): 
+def post_link(url: str, collection_id: Union[str, None] = None) -> requests.Response:
+    return requests.post(
+        url=lw_url() + "/api/v1/links", 
+        headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
+        json={ 
+            'url': url,
+            'type': 'url', 
+            'collection': { 'id': int(collection_id) }
+        }
+    )
+
+def add_link_to_collection(collection_id: str, url: str) -> None:  
+    # Assume https if no scheme.
+    if not urlsplit(url).scheme:
+        url = f'https://{url}'
+    # Require a netloc as minimum url 
+    if not urlsplit(url).netloc: 
+        raise RuntimeError("No netloc (domain) segment in url, exiting")
+    return post_link(url, collection_id)
+
+
+def get_all_collections() -> requests.Response: 
     return requests.get(
         url=lw_url() + "/api/v1/collections",
         headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
     )
 
 """
-OUTPUT LOGIC 
+WORKFLOW LOGIC 
 """
-def links_to_workflow_items(workflow: Workflow, response: requests.Response):
+def links_to_workflow_items(workflow: Workflow, response: requests.Response) -> None:
     for link in response.json()["response"]:
         item = workflow.add_item(
             title=link["name"],
@@ -73,9 +97,11 @@ def links_to_workflow_items(workflow: Workflow, response: requests.Response):
         )
     workflow.send_feedback()
 
-def all_collections_to_workflow_items(workflow: Workflow, filter_ss: str | None = None): 
-    for c in get_all_collections().json()["response"]:
-        # if filter provided, skip item if not substring of title
+def collections_to_workflow_items(
+        workflow: Workflow, response: requests.Response, filter_ss: Union[str, None] = None
+    ) -> None: 
+    for c in response.json()["response"]:
+        # if filter provided, skip item if not substring of titworkflow, le
         if filter_ss is not None and filter_ss.casefold() not in c["name"].casefold(): 
             continue 
         item = workflow.add_item( 
@@ -91,16 +117,16 @@ def all_collections_to_workflow_items(workflow: Workflow, filter_ss: str | None 
         )
     workflow.send_feedback()
 
-def view_saved_urls(workflow: Workflow, link_id: str):
-        base=lw_url()+ "/preserved/" + link_id + "?format="
-        for k, v in SAVED_FORMATS.items(): 
-            workflow.add_item(
-                title="Open" + k,
-                copytext=base + v, 
-                arg=base + v, 
-                valid=True
-            )
-        workflow.send_feedback()
+def saved_urls_to_workflow_items(workflow: Workflow, link_id: str) -> None:
+    base=lw_url()+ "/preserved/" + link_id + "?format="
+    for k, v in SAVED_FORMATS.items(): 
+        workflow.add_item(
+            title=f"Open " + k,
+            copytext=base + v, 
+            arg=base + v, 
+            valid=True
+        )
+    workflow.send_feedback()
 
 """
 MAIN 
@@ -113,19 +139,22 @@ def main(workflow: Workflow) -> requests.Response:
     args = workflow.args
     if args[0] == "link":
         # alfred-linkwarden.py link <QUERY (STR)> 
-        links_to_workflow_items(workflow, get_links(' '.join(args[1:]), None))
+        links_to_workflow_items(workflow, get_links(query_join(args, 1), None))
     elif args[0] == "collection":
         # alfred-linkwarden.py collection <COLLECTION ID (INT)>  <QUERY>
         links_to_workflow_items(workflow, get_links(query_join(args, 2), args[1]))
     elif args[0] == "collections": 
         # alfred-linkwarden.py collections <QUERY OR EMPTY>
-        all_collections_to_workflow_items(workflow, query_join(args, 1))
+        collections_to_workflow_items(workflow, get_all_collections(), query_join(args, 1))
     elif args[0] == "delete": 
         # alfred-linkwarden.py delete <LINK ID (INT)>
         delete_link(args[1])
     elif args[0] == "saved": 
         # alfred-linkwarden.py saved <LINK ID (INT)>
-        view_saved_urls(workflow, args[1])
+        saved_urls_to_workflow_items(workflow, args[1])
+    elif args[0] == "add":
+        # alfred-linkwarden.py add <COLLECTION ID (INT)> <URL (STR) OR NONE>
+        add_link_to_collection(args[1], query_join(args, 2))
 
 if __name__ == "__main__":
     # if somehow not inside venv, force recreate venv and rerun helper script
