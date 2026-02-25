@@ -4,6 +4,7 @@ import os
 import sys 
 from typing import Union
 
+
 import requests 
 from workflow import Workflow 
 
@@ -50,7 +51,10 @@ def get_all_collections():
         url=lw_url() + "/api/v1/collections",
         headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
     )
-    
+
+"""
+OUTPUT LOGIC 
+"""
 def links_to_workflow_items(workflow: Workflow, response: requests.Response):
     for link in response.json()["response"]:
         item = workflow.add_item(
@@ -69,10 +73,8 @@ def links_to_workflow_items(workflow: Workflow, response: requests.Response):
         )
     workflow.send_feedback()
 
-def collections_to_workflow_items(
-        workflow: Workflow, response: requests.Response, filter_ss: str | None = None
-    ): 
-    for c in response.json()["response"]:
+def all_collections_to_workflow_items(workflow: Workflow, filter_ss: str | None = None): 
+    for c in get_all_collections().json()["response"]:
         # if filter provided, skip item if not substring of title
         if filter_ss is not None and filter_ss.casefold() not in c["name"].casefold(): 
             continue 
@@ -88,6 +90,17 @@ def collections_to_workflow_items(
             "cmd", subtitle="Open in Browser"
         )
     workflow.send_feedback()
+
+def view_saved_urls(workflow: Workflow, link_id: str):
+        base=lw_url()+ "/preserved/" + link_id + "?format="
+        for k, v in SAVED_FORMATS.items(): 
+            workflow.add_item(
+                title="Open" + k,
+                copytext=base + v, 
+                arg=base + v, 
+                valid=True
+            )
+        workflow.send_feedback()
 
 """
 MAIN 
@@ -106,20 +119,13 @@ def main(workflow: Workflow) -> requests.Response:
         links_to_workflow_items(workflow, get_links(query_join(args, 2), args[1]))
     elif args[0] == "collections": 
         # alfred-linkwarden.py collections <QUERY OR EMPTY>
-        collections_to_workflow_items(workflow, get_all_collections(), query_join(args, 1))
+        all_collections_to_workflow_items(workflow, query_join(args, 1))
     elif args[0] == "delete": 
         # alfred-linkwarden.py delete <LINK ID (INT)>
         delete_link(args[1])
     elif args[0] == "saved": 
-        base=lw_url()+ "/preserved/" + args[1] + "?format="
-        for k, v in SAVED_FORMATS.items(): 
-            workflow.add_item(
-                title="Open" + k,
-                copytext=base + v, 
-                arg=base + v, 
-                valid=True
-            )
-        workflow.send_feedback()
+        # alfred-linkwarden.py saved <LINK ID (INT)>
+        view_saved_urls(workflow, args[1])
 
 if __name__ == "__main__":
     # if somehow not inside venv, force recreate venv and rerun helper script
