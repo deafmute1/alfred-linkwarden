@@ -10,7 +10,7 @@ import json
 import requests 
 from workflow import Workflow, Variables
 
-__version__ = "1.8"
+__version__ = "1.9"
 
 SAVED_FORMATS = {
     "Screenshot": "1", 

@@ -7,7 +7,8 @@ Requires: Python. Tested on Python3.9+.
 ## Setup 
 1. Set linkwarden API key 
 2. Set instance URL
-3. After install, please write `lw` or `lwc` and allow the script some time (>1 min) to install dependancies in the background before it will display results on subsequent uses.
+3. Optionally change keywords, or set up optional keyword for a specific collection.
+3. After install, please run any command and allow the script some time (>1 min) to install dependancies in the background before it will display results on subsequent uses.
 
 ## Usage 
 To display/search all links: `lw {query}`
@@ -19,10 +20,11 @@ To display/search all collections: `lwc {query}`
 - You can display/search each collection by returning it. The contents of each collection are searchable and have the same modifier options as `lw`
 - You can open the collection in your browser with `cmd/⌘` modifier
 
+To add a link: `lwa {url}` (or via universal action "Add to Linkwarden")
+- After entering the URL, you will be asked to select a collection to add the link to.
+
 You can search/display a collection via a custom keyword. 
-- An example is given in the workflow object. 
-- You need create a `Script Filter` with the script `bash ./helper.sh collection 16 "$@"`, where `16` is the specific collection id.
--  You can retrieve this id by looking at the url of a collection when it is open in your browse, it will be the final value in the path.
+- The "id" is the nmumber at the end of the url when you navigate to that collection in the Web App. 
 
 This workflow supports some special meta "magic" arguments. To view them, use `lw workflow:help`. To force the workflow to check for and install updates, use `lw workflow:update`. 
 
@@ -37,6 +39,7 @@ This workflow supports some special meta "magic" arguments. To view them, use `l
 - [ ] Delete `workflow/env` folder 
 - [ ] Export workflow from Alfred Workflow Editor. 
   - [ ] Copy README 
-  - [ ] Copy Version 
+  - [ ] Copy Version
+  - [ ] Export workflow file
 - [ ] Push and create git tag for version
 - [ ] Make GitHub release and upload `Linkwarden.Search.alfredworkflow`
