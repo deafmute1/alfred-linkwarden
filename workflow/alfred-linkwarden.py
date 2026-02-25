@@ -3,6 +3,7 @@ import subprocess
 import os 
 import sys 
 from typing import Union
+from collections.abc import Mapping, Iterable
 from urllib.parse import urlsplit
 import json
 
@@ -25,9 +26,14 @@ API QUERIES
 def lw_url() -> str:
     return os.environ['A_LW_URL'].rstrip('/')
 
-def get_links(
+def lw_bearer() -> str:
+    return {"Authorization": "Bearer " + os.environ['A_LW_API_KEY']} 
+
+def get_links_old(
         query: Union[str, None], collection_id: Union[str, None] = None
     ) -> requests.Response: 
+    # this method is depreciated but is currently the only way to retrieve all 
+    # links in a collection by id.
     params = {
         "searchByName": "true",
         "searchByDescription": "true",
@@ -39,20 +45,29 @@ def get_links(
     if collection_id is not None: params['collectionId'] = collection_id
     return requests.get(
         url=lw_url() + "/api/v1/links",
-        headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']}, 
+        headers=lw_bearer(), 
         params=params
+    )
+
+def search_links(query: Union[str, None]) -> requests.Response: 
+   return requests.get(
+        url=lw_url() + "/api/v1/search",
+        headers=lw_bearer(),
+        params={
+            "searchQueryString": query,
+        }
     )
 
 def delete_link(link_id: str) -> requests.Response: 
     return requests.delete(
         url=lw_url() + "/api/v1/links/" + link_id, 
-        headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
+        headers=lw_bearer(),
     )
 
 def post_link(url: str, collection_id: Union[str, None] = None) -> requests.Response:
     return requests.post(
         url=lw_url() + "/api/v1/links", 
-        headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
+        headers=lw_bearer(),
         json={ 
             'url': url,
             'type': 'url', 
@@ -73,14 +88,14 @@ def add_link_to_collection(collection_id: str, url: str) -> None:
 def get_all_collections() -> requests.Response: 
     return requests.get(
         url=lw_url() + "/api/v1/collections",
-        headers={"Authorization": "Bearer " + os.environ['A_LW_API_KEY']},
+        headers=lw_bearer(),
     )
 
 """
 WORKFLOW LOGIC 
 """
-def links_to_workflow_items(workflow: Workflow, response: requests.Response) -> None:
-    for link in response.json()["response"]:
+def links_to_workflow_items(workflow: Workflow, links: Iterable[Mapping[str, any]]) -> None:
+    for link in links:
         item = workflow.add_item(
             title=link["name"],
             uid="l" + str(link["id"]),
@@ -98,10 +113,10 @@ def links_to_workflow_items(workflow: Workflow, response: requests.Response) -> 
     workflow.send_feedback()
 
 def collections_to_workflow_items(
-        workflow: Workflow, response: requests.Response, filter_ss: Union[str, None] = None
+        workflow: Workflow, collections: Iterable[Mapping[str, any]], filter_ss: Union[str, None] = None
     ) -> None: 
-    for c in response.json()["response"]:
-        # if filter provided, skip item if not substring of titworkflow, le
+    for c in collections:
+        # if filter provided, skip item if not substring of filter_ss 
         if filter_ss is not None and filter_ss.casefold() not in c["name"].casefold(): 
             continue 
         item = workflow.add_item( 
@@ -139,13 +154,17 @@ def main(workflow: Workflow) -> requests.Response:
     args = workflow.args
     if args[0] == "link":
         # alfred-linkwarden.py link <QUERY (STR)> 
-        links_to_workflow_items(workflow, get_links(query_join(args, 1), None))
+        links_to_workflow_items(workflow, search_links(query_join(args, 1)).json()["data"]["links"])
     elif args[0] == "collection":
-        # alfred-linkwarden.py collection <COLLECTION ID (INT)>  <QUERY>
-        links_to_workflow_items(workflow, get_links(query_join(args, 2), args[1]))
+        # alfred-linkwarden.py collection <COLLECTION ID (INT)> <QUERY (STR)>
+        links_to_workflow_items(
+            workflow, get_links_old(query_join(args, 2), args[1]).json()["response"]
+        )
     elif args[0] == "collections": 
         # alfred-linkwarden.py collections <QUERY OR EMPTY>
-        collections_to_workflow_items(workflow, get_all_collections(), query_join(args, 1))
+        collections_to_workflow_items(
+            workflow, get_all_collections().json()["response"], query_join(args, 1)
+        )
     elif args[0] == "delete": 
         # alfred-linkwarden.py delete <LINK ID (INT)>
         delete_link(args[1])

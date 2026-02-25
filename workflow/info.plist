@@ -242,7 +242,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>keyword</key>
-				<string>lwa</string>
+				<string>{var:add_keyword}</string>
 				<key>subtext</key>
 				<string></string>
 				<key>text</key>
@@ -359,7 +359,7 @@
 				<key>acceptsurls</key>
 				<true/>
 				<key>name</key>
-				<string>Add to linkwarden</string>
+				<string>Add to Linkwarden</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.trigger.universalaction</string>
@@ -384,7 +384,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>lw</string>
+				<string>{var:links_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -456,7 +456,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>later</string>
+				<string>{var:specific_collection_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -468,7 +468,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>bash ./helper.sh collection 40 "$@"</string>
+				<string>bash ./helper.sh collection $specific_collection_id "$@"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -681,7 +681,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>lwc</string>
+				<string>{var:collections_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -861,7 +861,7 @@ This workflow supports some special meta "magic" arguments. To view them, use `l
 		<key>C3938C43-F374-46D7-9C55-3200430ED8C3</key>
 		<dict>
 			<key>xpos</key>
-			<real>250</real>
+			<real>245</real>
 			<key>ypos</key>
 			<real>270</real>
 		</dict>
@@ -870,16 +870,16 @@ This workflow supports some special meta "magic" arguments. To view them, use `l
 			<key>note</key>
 			<string>delete link</string>
 			<key>xpos</key>
-			<real>600</real>
+			<real>605</real>
 			<key>ypos</key>
 			<real>280</real>
 		</dict>
 		<key>D5134238-C175-42C1-BCAC-24D0EBC6FBAE</key>
 		<dict>
 			<key>xpos</key>
-			<real>270</real>
+			<real>250</real>
 			<key>ypos</key>
-			<real>165</real>
+			<real>150</real>
 		</dict>
 		<key>F1F713A4-7DB9-4D20-87CB-D3AD60341D02</key>
 		<dict>
@@ -933,9 +933,112 @@ This workflow supports some special meta "magic" arguments. To view them, use `l
 			<key>variable</key>
 			<string>A_LW_URL</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>lw</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword to search links</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>links_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>lwc</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword to search collection</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>collections_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>lwa</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Keyword to add link</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>add_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Optional.</string>
+			<key>label</key>
+			<string>Keyword to search a specific collection</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>specific_collection_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Optional</string>
+			<key>label</key>
+			<string>ID number of the specific collection</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>specific_collection_id</string>
+		</dict>
 	</array>
-	<key>variablesdontexport</key>
-	<array/>
 	<key>version</key>
 	<string>1.8</string>
 	<key>webaddress</key>
