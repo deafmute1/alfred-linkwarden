@@ -3,18 +3,15 @@ import shutil
 import subprocess
 import sys
 from collections.abc import Iterable, Mapping
-from typing import Union
+from typing import Any, Union
 from urllib.parse import urlsplit
 
 import requests
-
 from workflow import Workflow
 
 __version__ = "1.9"
 
-SAVED_FORMATS = {
-    "Screenshot": "1", "PDF": "2", "Readable": "3", "Webpage Copy": "4"
-}
+SAVED_FORMATS = {"Screenshot": "1", "PDF": "2", "Readable": "3", "Webpage Copy": "4"}
 
 """
 API QUERIES
@@ -25,7 +22,7 @@ def lw_url() -> str:
     return os.environ["A_LW_URL"].rstrip("/")
 
 
-def lw_bearer() -> str:
+def lw_bearer() -> dict[str, str]:
     return {"Authorization": "Bearer " + os.environ["A_LW_API_KEY"]}
 
 
@@ -67,18 +64,18 @@ def delete_link(link_id: str) -> requests.Response:
 
 
 def post_link(
-    url: str, collection_id: Union[str, None] = None
+    url: str, collection_id: Union[str, int, None] = None
 ) -> requests.Response:
+    if collection_id is not None:
+        collection_id = int(collection_id)
     return requests.post(
         url=lw_url() + "/api/v1/links",
         headers=lw_bearer(),
-        json={
-            "url": url, "type": "url", "collection": {"id": int(collection_id)}
-        }
+        json={"url": url, "type": "url", "collection": {"id": collection_id}},
     )
 
 
-def add_link_to_collection(collection_id: str, url: str) -> None:
+def add_link_to_collection(collection_id: str, url: str) -> requests.Response:
     # Assume https if no scheme.
     if not urlsplit(url).scheme:
         url = f"https://{url}"
@@ -101,54 +98,51 @@ WORKFLOW LOGIC
 
 
 def links_to_workflow_items(
-    workflow: Workflow, links: Iterable[Mapping[str, any]]
+    workflow: Workflow, links: Iterable[Mapping[str, str | int | None]]
 ) -> None:
     for link in links:
         item = workflow.add_item(
             title=link["name"],
             uid="l" + str(link["id"]),
-            subtitle=link["url"],
+            subtitle=str(link["url"]),
             copytext=link["url"],
             arg=link["url"],
             valid=True,
         )
-        item.add_modifier(
-            "shift", subtitle="Delete Entry", arg=str(link["id"])
-        )
-        item.add_modifier(
+        _ = item.add_modifier("shift", subtitle="Delete Entry", arg=str(link["id"]))
+        _ = item.add_modifier(
             "cmd", subtitle="Open preserved version", arg=str(link["id"])
         )
     workflow.send_feedback()
 
 
-def match_substring(f: str, s: str) -> bool:
-    return f is not None \
-        and f.casefold() in s.casefold()
+def match_substring(f: str | None, s: str) -> bool:
+    return f is not None and f.casefold() in s.casefold()
 
 
 def collections_to_workflow_items(
     workflow: Workflow,
-    collections: Iterable[Mapping[str, any]],
+    collections: Iterable[Mapping[str, str | int | None]],
     match_string: Union[str, None] = None,
 ) -> None:
     for c in collections:
-        if match_substring(match_string, c["name"]):
+        if match_substring(match_string, str(c["name"])):
             item = workflow.add_item(
                 title=c["name"],
                 uid="c" + str(c["id"]),
-                subtitle=c["description"],
+                subtitle=str(c["description"]),
                 copytext=lw_url() + "/collections/" + str(c["id"]),
                 arg=str(c["id"]),
                 valid=True,
             )
-            item.add_modifier("cmd", subtitle="Open in Browser")
+            _ = item.add_modifier("cmd", subtitle="Open in Browser")
     workflow.send_feedback()
 
 
 def saved_urls_to_workflow_items(workflow: Workflow, link_id: str) -> None:
     base = lw_url() + "/preserved/" + link_id + "?format="
     for k, v in SAVED_FORMATS.items():
-        workflow.add_item(
+        _ = workflow.add_item(
             title="Open " + k, copytext=base + v, arg=base + v, valid=True
         )
     workflow.send_feedback()
@@ -159,12 +153,11 @@ MAIN
 """
 
 
-def query_join(lst: list, from_index: int = 0) -> Union[str, None]:
-    ret = " ".join(lst[from_index:])
-    return ret if ret else None
+def query_join(lst: list[Any], from_index: int = 0) -> str:
+    return " ".join(lst[from_index:])
 
 
-def main(workflow: Workflow) -> requests.Response:
+def main(workflow: Workflow):
     args = workflow.args
     if args[0] == "link":
         # alfred-linkwarden.py link <QUERY (STR)>
@@ -174,14 +167,12 @@ def main(workflow: Workflow) -> requests.Response:
     elif args[0] == "collection":
         # alfred-linkwarden.py collection <COLLECTION ID (INT)> <QUERY (STR)>
         links_to_workflow_items(
-            workflow,
-            get_links_old(query_join(args, 2), args[1]).json()["response"]
+            workflow, get_links_old(query_join(args, 2), args[1]).json()["response"]
         )
     elif args[0] == "collections":
         # alfred-linkwarden.py collections <QUERY OR EMPTY>
         collections_to_workflow_items(
-            workflow,
-            get_all_collections().json()["response"], query_join(args, 1)
+            workflow, get_all_collections().json()["response"], query_join(args, 1)
         )
     elif args[0] == "delete":
         # alfred-linkwarden.py delete <LINK ID (INT)>
