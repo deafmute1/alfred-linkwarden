@@ -7,6 +7,7 @@ from typing import Any, Union
 from urllib.parse import urlsplit
 
 import requests
+
 from workflow import Workflow
 
 __version__ = "1.9"
@@ -98,17 +99,21 @@ WORKFLOW LOGIC
 
 
 def links_to_workflow_items(
-    workflow: Workflow, links: Iterable[Mapping[str, str | int | None]]
+    workflow: Workflow,
+    links: Iterable[Mapping[str, str | int | None]],
+    send_uid: bool = True,
 ) -> None:
     for link in links:
-        item = workflow.add_item(
-            title=link["name"],
-            uid="l" + str(link["id"]),
-            subtitle=str(link["url"]),
-            copytext=link["url"],
-            arg=link["url"],
-            valid=True,
-        )
+        itemf = {
+            "title": link["name"],
+            "subtitle": str(link["url"]),
+            "copytext": link["url"],
+            "arg": link["url"],
+            "valid": True,
+        }
+        if send_uid:
+            itemf["uid"] = ("l" + str(link["id"]),)
+        item = workflow.add_item(**itemf)
         _ = item.add_modifier("shift", subtitle="Delete Entry", arg=str(link["id"]))
         _ = item.add_modifier(
             "cmd", subtitle="Open preserved version", arg=str(link["id"])
@@ -159,15 +164,26 @@ def query_join(lst: list[Any], from_index: int = 0) -> str:
 
 def main(workflow: Workflow):
     args = workflow.args
+    sort_collections = (
+        True
+        if os.getenv("sort_collections", "").casefold() in ["yes", "true", "1"]
+        else False
+    )
     if args[0] == "link":
         # alfred-linkwarden.py link <QUERY (STR)>
+        query = query_join(args, 1)
+        # consider empty string or whitespace only string to be
+        # a request for the psuedo-collection "recent"
+        send_uid = False if not query.strip() else True
         links_to_workflow_items(
-            workflow, search_links(query_join(args, 1)).json()["data"]["links"]
+            workflow, search_links(query).json()["data"]["links"], send_uid
         )
     elif args[0] == "collection":
         # alfred-linkwarden.py collection <COLLECTION ID (INT)> <QUERY (STR)>
         links_to_workflow_items(
-            workflow, get_links_old(query_join(args, 2), args[1]).json()["response"]
+            workflow,
+            get_links_old(query_join(args, 2), args[1]).json()["response"],
+            sort_collections,
         )
     elif args[0] == "collections":
         # alfred-linkwarden.py collections <QUERY OR EMPTY>
