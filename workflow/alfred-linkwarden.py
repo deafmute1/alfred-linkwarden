@@ -10,7 +10,7 @@ import requests
 
 from workflow import Workflow
 
-__version__ = "1.9"
+__version__ = "1.10"
 
 SAVED_FORMATS = {"Screenshot": "1", "PDF": "2", "Readable": "3", "Webpage Copy": "4"}
 

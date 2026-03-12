@@ -1062,8 +1062,10 @@ This workflow supports some special meta "magic" arguments. To view them, use `l
 			<string>specific_collection_id</string>
 		</dict>
 	</array>
+	<key>variablesdontexport</key>
+	<array/>
 	<key>version</key>
-	<string>1.9</string>
+	<string>1.10</string>
 	<key>webaddress</key>
 	<string>https://github.com/deafmute1/alfred-linkwarden</string>
 </dict>
